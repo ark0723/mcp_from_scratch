@@ -1,0 +1,26 @@
+# Core dependencies from pyproject.toml
+mcp[cli]==1.6.0
+requests==2.32.3
+python-dotenv==1.1.0
+google-generativeai==0.8.5
+langchain==0.3.25
+langchain-openai==0.3.16
+langchain-core==0.3.59
+langchain-mcp-adapters==0.0.9
+langgraph==0.4.3
+langchain-google-genai==2.0.10
+black>=25.1.0
+
+# Development dependencies
+ruff>=0.11.10
+
+# Optional dependencies for smolagents
+# Uncomment if needed:
+# smolagents[mcp]
+# transformers
+# mcpadapt
+
+# Optional dependencies for openai
+# Uncomment if needed:
+# openai
+# openai-agents 
