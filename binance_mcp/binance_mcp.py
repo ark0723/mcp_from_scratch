@@ -33,6 +33,37 @@ def get_price(symbol: str) -> Any:
     response.raise_for_status()
     return response.json()
 
+@mcp.tool()
+def get_price_24hr_change(symbol: str) -> Any:
+    """
+    Get the price change of a crypto asset from Binance
+
+    Args:
+        symbol(str): The symbol of the crypto asset to get the price change of
+    """
+    symbol = get_symbol_from_input(symbol)
+    url = f"https://api.binance.us/api/v3/ticker/24hr?symbol={symbol}"
+    response = requests.get(url)
+    response.raise_for_status()
+    return response.json()
+
+@mcp.tool()
+def get_rolling_windows_price(symbol: str, window: str = "1d") -> Any:
+    """
+    Get the rolling windows price of a crypto asset from Binance
+
+    Args:
+        symbol(str): The symbol of the crypto asset to get the rolling windows price of
+        window(str): The window size of the rolling windows price
+            - Minutes: 1m, 2m, ..., 59m
+            - Hours: 1h, 2h, ..., 23h
+            - Days: 1d, 2d, ..., 7d
+    """
+    symbol = get_symbol_from_input(symbol)
+    url = f"https://api.binance.us/api/v3/ticker?symbol={symbol}&windowSize={window}"
+    response = requests.get(url)
+    response.raise_for_status()
+    return response.json()
 
 if __name__ == "__main__":
     print("Starting MCP server...")
