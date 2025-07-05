@@ -1,0 +1,4 @@
+2025-07-03 11:52:58.257207: Successfully got the current price for BTCUSDT: 109274.57000000
+2025-07-03 11:53:09.752007: Error getting price for DDDDD
+: 400 {"code":-1100,"msg":"Illegal characters found in parameter 'symbol'; legal range is '^[A-Z0-9-_.]{1,20}$'."}
+2025-07-03 11:54:47.258410: Successfully got the current price for BTCUSDT: 109274.57000000

@@ -9,3 +9,7 @@
 ```
 npx @modelcontextprotocol/inspector <<PATH OF PYTHON>> <<PATH OF YOUR binance_mcp.py>>
 ```
+or 
+```
+mcp dev <<PATH OF YOUR binance_mcp.py>>
+```
