@@ -51,7 +51,6 @@ def _initialize_files():
             ("uni", "UNIUSDT"),
             ("xmr", "XMRUSDT"),
             ("xem", "XEMUSDT"),
-            ("my_favorite", "ETCUSDT"),
         ]
 
         with open(SYMBOL_MAP_FILE, "w") as f:
@@ -110,6 +109,64 @@ def get_symbol_map() -> str:
 def read_log() -> str:
     with open(LOG_FILE, "r") as f:
         return f.read()
+
+
+@mcp.prompt()
+def executive_summary() -> str:
+    """Returns an executive summary of Bitcoin and Ethereum"""
+    return """
+    Get the prices of the following crypto asset: btc, eth
+    
+    Provide me with an executive summary including the 
+    two-sentence summary of the crypto asset, the current price, 
+    the price change in the last 24 hours, and the percentage change
+    in the last 24 hours.
+
+    When using the get_price and get_price_price_change tools,
+    use the symbol as the argument.
+    
+    Symbols: For bitcoin/btc, the symbol is "BTCUSDT".
+    Symbols: For ethereum/eth, the symbol is "ETHUSDT".
+    """
+
+
+@mcp.prompt()
+def crypto_summary(cryptos: str) -> str:
+    """Return an executive summary of crypto assets (supports multiple assets separated by commas)"""
+    return f"""
+            Get the current price of the following crypto assets:
+            {cryptos}
+            
+            If multiple assets are provided (separated by commas), get data for each one.
+            Provide a summary including the current price and price change in the last 24 hours for each asset.
+
+            When using the get_price and get_price_24hr_change tools, use the symbol as the argument.
+            
+            Symbol mappings:
+            For bitcoin/btc, the symbol is BTCUSDT. 
+            For ethereum/eth, the symbol is ETHUSDT.
+            For solana/sol, the symbol is SOLUSDT.
+            For doge, the symbol is DOGEUSDT.
+            For shiba, the symbol is SHIBUSDT.
+            For xrp, the symbol is XRPUSDT.
+            For ada, the symbol is ADAUSDT.
+            For dot, the symbol is DOTUSDT.
+            For link, the symbol is LINKUSDT.
+            For ltc, the symbol is LTCUSDT.
+            For xlm, the symbol is XLMUSDT.
+            For eos, the symbol is EOSUSDT.
+            For bnb, the symbol is BNBUSDT.
+            For matic, the symbol is MATICUSDT.
+            For avax, the symbol is AVAXUSDT.
+            For algo, the symbol is ALGOUSDT.
+            For ftt, the symbol is FTTUSDT.
+            For mana, the symbol is MANAUSDT.
+            For uni, the symbol is UNIUSDT.
+            For xmr, the symbol is XMRUSDT.
+            For xem, the symbol is XEMUSDT. 
+            
+            Format the output as a clean summary for each asset.
+            """
 
 
 # https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#resources
