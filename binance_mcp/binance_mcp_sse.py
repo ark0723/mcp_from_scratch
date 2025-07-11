@@ -1,15 +1,12 @@
 import datetime
-from pathlib import Path
 from fastmcp import FastMCP
 import requests
 from typing import Any
-import csv
 from collections import deque
 import logging
 
 # In-memory logging for cloud deployment
 _activity_logs = deque(maxlen=1000)  # Keep last 1000 log entries
-_symbol_cache = None
 
 # Initialize symbol mappings in memory (no local files needed)
 SYMBOL_MAPPINGS = {
@@ -77,25 +74,6 @@ def get_recent_logs(limit: int = 50) -> str:
     limit = max(1, min(limit, 100))  # Clamp between 1-100
     recent_logs = list(_activity_logs)[-limit:]
     return "\n".join(recent_logs)
-
-
-@mcp.prompt()
-def executive_summary() -> str:
-    """Returns an executive summary of Bitcoin and Ethereum"""
-    return """
-    Get the prices of the following crypto asset: btc, eth
-
-    Provide me with an executive summary including the
-    two-sentence summary of the crypto asset, the current price,
-    the price change in the last 24 hours, and the percentage change
-    in the last 24 hours.
-
-    When using the get_price and get_price_price_change tools,
-    use the symbol as the argument.
-
-    Symbols: For bitcoin/btc, the symbol is "BTCUSDT".
-    Symbols: For ethereum/eth, the symbol is "ETHUSDT".
-    """
 
 
 @mcp.prompt()
@@ -241,5 +219,7 @@ if __name__ == "__main__":
         transport="http",
         host="127.0.0.1",
         port=8897,
-        log_level="info",  # Changed from debug to reduce noise
+        log_level="info",
     )
+    # sse protocol (will be deprecated) : compatible with Claude, Cursor, etc.
+    # mcp.run(transport="sse")
